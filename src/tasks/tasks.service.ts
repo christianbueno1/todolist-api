@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Task } from './task.entity';
 import { TaskStatus } from './task.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 @Injectable()
 export class TasksService {
@@ -11,13 +14,36 @@ export class TasksService {
     { id: 4, description: 'Task 4', status: TaskStatus.OPEN, deletedAt: new Date('2024-02-17') },
   ];
 
+  constructor(
+    @InjectRepository(Task)
+    private readonly tasksRepository: Repository<Task>,
+  ) {}
+
   getAllTasks() {
     return this.tasks;
   }
 
+  findAll(): Promise<Task[]> {
+    return this.tasksRepository.find();
+  }
+
+  findOne(id: number): Promise<Task> {
+    return this.tasksRepository.findOne(id);
+  }
+
+  update(id: number, updateTaskDto: CreateTaskDto) {
+    return `This action updates a #${id} task`;
+  }
+    
+
+  async remove(id: number): Promise<void> {
+    await this.tasksRepository.delete(id);
+  }
+
   // findTaskById(id: string) {}
 
-  // createTask(task: Task) {
-  //   this.tasks.push(task);
-  // }
+  create(createTaskDto: CreateTaskDto) {
+    const newCreateTaskDto = this.tasksRepository.create(createTaskDto);
+    return this.tasksRepository.save(newCreateTaskDto);
+  }
 }

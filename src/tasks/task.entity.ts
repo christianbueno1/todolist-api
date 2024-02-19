@@ -14,10 +14,11 @@ export class Task {
   @PrimaryGeneratedColumn()
   id: number;
 
+  // @Column({ unique: true})
   @Column()
   description: string;
 
-  @Column({ default: TaskStatus.OPEN})
+  @Column({ type: 'enum', enum: TaskStatus, default: TaskStatus.OPEN})
   status: TaskStatus;
 
   @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true })
