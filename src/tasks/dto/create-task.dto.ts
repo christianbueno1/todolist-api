@@ -4,8 +4,8 @@ import { TaskStatus } from "../task.entity";
 export class CreateTaskDto {
 
   @IsString()
-  description: string;
+  public description: string;
 
   @IsString()
-  status: TaskStatus;
+  public status: TaskStatus;
 }

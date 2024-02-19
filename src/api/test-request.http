@@ -1,0 +1,34 @@
+GET http://localhost:3000/api/v1/tasks
+
+###
+POST http://localhost:3000/api/v1/tasks
+Content-Type: application/json
+
+{
+  "description": "go to gym",
+  "status": "OPEN"
+}
+
+###
+GET http://localhost:3000/api/v1/tasks/2
+
+###
+DELETE http://localhost:3000/api/v1/tasks/6
+
+###
+PATCH http://localhost:3000/api/v1/tasks/7
+Content-Type: application/json
+
+{
+  "description": "go to party",
+  "status": "OPEN"
+}
+
+# {
+#   "description": "go to party",
+#   "role": "OPEN"
+# }
+
+# {
+#   "status": "DONE"
+# }

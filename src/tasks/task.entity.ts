@@ -15,7 +15,7 @@ export class Task {
   id: number;
 
   // @Column({ unique: true})
-  @Column()
+  @Column('text')
   description: string;
 
   @Column({ type: 'enum', enum: TaskStatus, default: TaskStatus.OPEN})
