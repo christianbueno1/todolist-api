@@ -1,26 +1,45 @@
 GET http://localhost:3000/api/v1/tasks
 
 ###
+GET http://localhost:3000/api/v1/tasks/find-all-task-open-by-user/12
+
+###
+GET http://localhost:3000/api/v1/tasks/find-all-task-done-by-user/12
+
+###
+GET http://localhost:3000/api/v1/tasks/16
+
+###
 POST http://localhost:3000/api/v1/tasks
 Content-Type: application/json
 
+# {
+#   "description": "go to church",
+#   "status": "OPEN",
+#   "userId": 10
+# }
+
 {
-  "description": "go to gym",
-  "status": "OPEN"
+  "description": "clean the room",
+  "status": "OPEN",
+  "userId": 11
 }
 
 ###
-GET http://localhost:3000/api/v1/tasks/2
-
-###
-DELETE http://localhost:3000/api/v1/tasks/6
-
-###
-PATCH http://localhost:3000/api/v1/tasks/7
+POST http://localhost:3000/api/v1/tasks/12
 Content-Type: application/json
 
 {
-  "description": "go to party",
+  "description": "bathing",
+  "status": "DONE"
+}
+
+###
+PATCH http://localhost:3000/api/v1/tasks/16
+Content-Type: application/json
+
+{
+  "description": "go to the beach",
   "status": "OPEN"
 }
 
@@ -32,3 +51,51 @@ Content-Type: application/json
 # {
 #   "status": "DONE"
 # }
+
+####
+PATCH http://localhost:3000/api/v1/tasks/update-task-done/16
+
+###
+DELETE http://localhost:3000/api/v1/tasks/15
+
+
+### Users
+GET http://localhost:3000/api/v1/users
+
+###
+POST http://localhost:3000/api/v1/users
+Content-Type: application/json
+
+# {
+#   "username": "tonystark",
+#   "password": "tony123",
+#   "email": "tony@ibm.com"
+# }
+
+{
+  "username": "brucebanner",
+  "password": "bruce123",
+  "email": "bruce@ibm.com"
+}
+
+# {
+#   "username": "johndoe",
+#   "password": "password",
+#   "email": "john@ibm.com"
+# }
+
+###
+DELETE http://localhost:3000/api/v1/users/3
+
+
+### Auth
+POST http://localhost:3000/api/v1/auth/login
+
+###
+POST http://localhost:3000/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "username": "brucebanner",
+  "email": "bruce@ibm.com"
+}

@@ -1,4 +1,4 @@
-import { IsString } from "class-validator";
+import { IsNumber, IsString } from "class-validator";
 import { TaskStatus } from "../task.entity";
 
 export class CreateTaskDto {
@@ -8,4 +8,7 @@ export class CreateTaskDto {
 
   @IsString()
   public status: TaskStatus;
+
+  // @IsNumber()
+  // public userId: number;
 }

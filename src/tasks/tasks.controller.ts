@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, ValidationPipe } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Task } from './task.entity';
 import { UpdateTaskDto } from './dto/update-task.dto';
@@ -10,9 +10,16 @@ import { UpdateResult } from 'typeorm';
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
-  @Post()
-  create(@Body() createTaskDto: CreateTaskDto) {
-    return this.tasksService.create(createTaskDto);
+  @Post(':userId')
+  create(@Body(ValidationPipe) createTaskDto: CreateTaskDto, @Param('userId') userId: number) {
+    try {
+      console.log('userId', userId, typeof userId);
+      return this.tasksService.create(createTaskDto, Number(userId));
+    } catch (error) {
+      console.log('error', error);
+      throw new NotFoundException(error.message);
+      
+    }
   }
 
   // @Get()
@@ -25,6 +32,16 @@ export class TasksController {
     return this.tasksService.findAll();
   }
 
+  @Get('/find-all-task-open-by-user/:userId')
+  findAllTaskOpenByUser(@Param('userId') userId: number): Promise<Task[]> {
+    return this.tasksService.findAllTaskOpenByUser(Number(userId));
+  }
+
+  @Get('/find-all-task-done-by-user/:userId')
+  findAllTaskDoneByUser(@Param('userId') userId: number): Promise<Task[]> {
+    return this.tasksService.findAllTaskDoneByUser(Number(userId));
+  }
+
   @Get(':id')
   findOne(@Param('id') id: number): Promise<Task> {
     return this.tasksService.findOne(id);
@@ -35,9 +52,14 @@ export class TasksController {
     return this.tasksService.update(id, updateTaskDto);
   }
 
+  @Patch('/update-task-done/:id')
+  updateTaskDone(@Param('id') id: number) {
+    return this.tasksService.updateTaskDone(Number(id));
+  }
+
   @Delete(':id')
   remove(@Param('id') id: number): Promise<UpdateResult> {
-    return this.tasksService.remove(id);
+    return this.tasksService.remove(Number(id));
   }
 
 

@@ -1,6 +1,7 @@
 // create a task class: id description, status
 
-import { Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/users/entities/user.entity";
+import { Column, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 export enum TaskStatus {
   OPEN = 'OPEN',
@@ -21,7 +22,18 @@ export class Task {
   @Column({ type: 'enum', enum: TaskStatus, default: TaskStatus.OPEN})
   status: TaskStatus;
 
+  @Column({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  date: Date;
+
   @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true })
   deletedAt: Date;
+
+  @Column({ name: 'user_id'})
+  userId: number;
+
+  @ManyToOne(() => User, (user) => user.tasks)
+  @JoinColumn({ name: 'user_id'})
+  // @JoinColumn()
+  user: User;
 }
 
