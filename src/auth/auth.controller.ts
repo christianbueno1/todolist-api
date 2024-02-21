@@ -1,9 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { RegisterAuthDto } from './dto/register-auth.dto';
+import { LoginAuthDto } from './dto/login-auth.dto';
+import { AuthGuard } from './auth.guard';
+import { RequestWithPayload } from 'src/interfaces/requestWithPayload.interface';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -11,15 +14,21 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  login() {
-    return this.authService.login();
+  login(@Body() loginAuthDto: LoginAuthDto){
+    return this.authService.login(loginAuthDto);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('profile')
+  profile(@Request() req: RequestWithPayload){
+    return req.user;
   }
 
   @Post('register')
-  register(@Body(ValidationPipe) registerAuthDto: RegisterAuthDto) {
+  register(@Body() registerAuthDto: RegisterAuthDto) {
     console.log('registerAuthDto', registerAuthDto );
     
-    return this.authService.register();
+    return this.authService.register(registerAuthDto);
   }
   
   @Post()

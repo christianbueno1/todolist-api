@@ -36,6 +36,16 @@ export class UsersService {
     });
   }
 
+  async findOneByUsername(username: string): Promise<User | undefined> {
+    // return await this.usersRepository.findOneOrFail({ where: { username } });
+    return await this.usersRepository.findOne({ where: { username } });
+  }
+
+  async findOneByEmail(email: string): Promise<User | undefined> {
+    // return await this.usersRepository.findOneOrFail({ where: { email } });
+    return await this.usersRepository.findOne({ where: { email } });
+  }
+
   async findUserByEmail(email: string): Promise<User> {
     return await this.usersRepository.findOneOrFail({ where: { email } });
   }

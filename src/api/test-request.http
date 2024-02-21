@@ -1,16 +1,16 @@
-GET http://localhost:3000/api/v1/tasks
+GET http://localhost:49153/api/v1/tasks
 
 ###
-GET http://localhost:3000/api/v1/tasks/find-all-task-open-by-user/12
+GET http://localhost:49153/api/v1/tasks/find-all-task-open-by-user/15
 
 ###
-GET http://localhost:3000/api/v1/tasks/find-all-task-done-by-user/12
+GET http://localhost:49153/api/v1/tasks/find-all-task-done-by-user/12
 
 ###
-GET http://localhost:3000/api/v1/tasks/16
+GET http://localhost:49153/api/v1/tasks/16
 
 ###
-POST http://localhost:3000/api/v1/tasks
+POST http://localhost:49153/api/v1/tasks
 Content-Type: application/json
 
 # {
@@ -26,21 +26,30 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/api/v1/tasks/12
+POST http://localhost:49153/api/v1/tasks/15
 Content-Type: application/json
 
 {
-  "description": "bathing",
-  "status": "DONE"
+  "description": "go to church",
+  "status": "OPEN"
 }
 
+# {
+#   "description": "read the bible",
+#   "status": "OPEN"
+# }
+
+# {
+#   "description": "bathing",
+#   "status": "DONE"
+# }
+
 ###
-PATCH http://localhost:3000/api/v1/tasks/16
+PATCH http://localhost:49153/api/v1/tasks/18
 Content-Type: application/json
 
 {
-  "description": "go to the beach",
-  "status": "OPEN"
+  "status": "DONE"
 }
 
 # {
@@ -53,17 +62,23 @@ Content-Type: application/json
 # }
 
 ####
-PATCH http://localhost:3000/api/v1/tasks/update-task-done/16
+PATCH http://localhost:49153/api/v1/tasks/update-task-done/16
 
 ###
-DELETE http://localhost:3000/api/v1/tasks/15
+DELETE http://localhost:49153/api/v1/tasks/15
 
 
 ### Users
-GET http://localhost:3000/api/v1/users
+GET http://localhost:49153/api/v1/users
 
 ###
-POST http://localhost:3000/api/v1/users
+GET http://localhost:49153/api/v1/users/email/tony@ibm.com
+
+###
+GET http://localhost:49153/api/v1/users/username/brucewayne
+
+###
+POST http://localhost:49153/api/v1/users
 Content-Type: application/json
 
 # {
@@ -85,17 +100,40 @@ Content-Type: application/json
 # }
 
 ###
-DELETE http://localhost:3000/api/v1/users/3
+DELETE http://localhost:49153/api/v1/users/3
 
 
 ### Auth
-POST http://localhost:3000/api/v1/auth/login
-
-###
-POST http://localhost:3000/api/v1/auth/register
+POST http://localhost:49153/api/v1/auth/login
 Content-Type: application/json
 
 {
-  "username": "brucebanner",
-  "email": "bruce@ibm.com"
+  "email": "tony@ibm.com",
+  "password": "tony123"
 }
+
+###
+POST http://localhost:49153/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "username": "brucewayne",
+  "email": "bruce@ibm.com",
+  "password": "bruce123"
+}
+
+# {
+#   "username": "tonystark",
+#   "email": "tony@ibm.com",
+#   "password": "tony123"
+# }
+
+# {
+#   "username": "steverogers",
+#   "email": "steve@ibm.com",
+#   "password": "steve123"
+# }
+
+###
+GET http://localhost:49153/api/v1/auth/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbnlAaWJtLmNvbSIsInN1YiI6MTYsImlhdCI6MTcwODQ1MDA4NSwiZXhwIjoxNzA4NDUwMTQ1fQ.Ac-1heJ5M0ExUXJTEOlhVlF_S8-u9TG4U0QzOxCQdX4
