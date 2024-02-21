@@ -1,59 +1,54 @@
 ## Todolist
 
-## Installation
+### Installation
 
-```bash
-# create the database
+#### Create the database in a container
+
+```
+# use docker or podman
+
+podman container run \         
+--detach --restart always --name todolist \
+-p 3307:3306 \
+--env MYSQL_USER=chris \
+--env MYSQL_PASSWORD=maGazine1! \
+--env MYSQL_ROOT_PASSWORD=maGazine1! \
+--env MYSQL_DATABASE=company \
+mysql:8.0.36-debian
+
+```
+
+- import the data todolist-database.sql
 
 
+```
+mysql -u root -h 127.0.0.1 -P 3307 -p company < todolist-database.sql
+
+```
+
+#### Run the API
+
+```
 npm i
 
-#http://localhost:49153
+# http://localhost:49153
+# for env var info check .development.env
 npm run start:dev
 
-#test the endpoints with 
-#src/api/test-request.http
+# test the endpoints with the file
+# use with REST Client in vscode
+# src/api/test-request.http
 
 ```
 
 [got to http://localhost:49153](http://localhost:49153)
 
-## Running the app
 
-```bash
-# development
-$ npm run start
+#### Login test users
 
-# watch mode
-$ npm run start:dev
+| email | password |
+| :-: | :-:|
+|bruce@ibm.com|bruce123|
+steve@ibm.com|steve123|
+|tony@ibm.com|tony123|
 
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
