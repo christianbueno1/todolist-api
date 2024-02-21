@@ -18,14 +18,6 @@ mysql:8.0.36-debian
 
 ```
 
-- import the data todolist-database.sql
-
-
-```
-mysql -u root -h 127.0.0.1 -P 3307 -p company < todolist-database.sql
-
-```
-
 #### Run the API
 
 ```
@@ -42,6 +34,13 @@ npm run start:dev
 ```
 
 [got to http://localhost:49153](http://localhost:49153)
+
+- import the data todolist-database.sql to the database
+
+```
+mysql -u root -h 127.0.0.1 -P 3307 -p company < todolist-database.sql
+
+```
 
 
 #### Login test users
