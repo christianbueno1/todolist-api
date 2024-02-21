@@ -37,6 +37,29 @@ export class TasksService {
     return await this.tasksRepository.save(task);
   }
 
+  async findAll(): Promise<Task[]> {
+    return await this.tasksRepository.find({
+      // relations: ['user'],
+      relations: {
+        user: true,
+      },
+    });
+  }
+
+  async findAllTasksByUser(userId: number): Promise<Task[]> {
+    return await this.tasksRepository.find({
+      // relations: ['user'],
+      relations: {
+        user: true,
+      },
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+    });
+  }
+  
   async findAllTaskOpenByUser(userId: number): Promise<Task[]> {
     return await this.tasksRepository.find({
       // relations: ['user'],
@@ -63,16 +86,6 @@ export class TasksService {
           id: userId,
         },
         status: TaskStatus.DONE,
-      },
-    });
-  }
-
-
-  async findAll(): Promise<Task[]> {
-    return await this.tasksRepository.find({
-      // relations: ['user'],
-      relations: {
-        user: true,
       },
     });
   }

@@ -32,6 +32,11 @@ export class TasksController {
     return this.tasksService.findAll();
   }
 
+  @Get('/find-all-tasks-by-user/:userId')
+  findAllTasksByUser(@Param('userId') userId: number): Promise<Task[]> {
+    return this.tasksService.findAllTasksByUser(Number(userId));
+  }
+
   @Get('/find-all-task-open-by-user/:userId')
   findAllTaskOpenByUser(@Param('userId') userId: number): Promise<Task[]> {
     return this.tasksService.findAllTaskOpenByUser(Number(userId));

@@ -10,6 +10,9 @@ GET http://localhost:49153/api/v1/tasks/find-all-task-done-by-user/12
 GET http://localhost:49153/api/v1/tasks/16
 
 ###
+GET http://localhost:49153/api/v1/tasks/find-all-tasks-by-user/15
+
+###
 POST http://localhost:49153/api/v1/tasks
 Content-Type: application/json
 
@@ -65,7 +68,7 @@ Content-Type: application/json
 PATCH http://localhost:49153/api/v1/tasks/update-task-done/16
 
 ###
-DELETE http://localhost:49153/api/v1/tasks/15
+DELETE http://localhost:49153/api/v1/tasks/20
 
 
 ### Users
